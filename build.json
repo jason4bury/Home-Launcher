@@ -1,0 +1,13 @@
+{
+  "AppName": "Home Launcher",
+  "EntryScript": "src\\Home-Launcher.ps1",
+  "Icon": "assets\\Home-Launcher.ico",
+  "Side": "Home",
+  "Description": "PowerShell/WPF tool for listing and starting every Home tool",
+  "Bundle": {
+    "Engine": "..\\..\\..\\_shared\\Launcher-Engine\\Source\\src\\Launcher-Engine.ps1",
+    "Profile": "src\\profile.home.json",
+    "EmbedAssets": ["assets\\Home-Launcher.png"]
+  },
+  "IncludeFiles": []
+}

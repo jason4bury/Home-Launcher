@@ -1,0 +1,34 @@
+{
+  "Name": "Home Launcher",
+  "Title": "Home Launcher",
+  "Subtitle": "My Home tools",
+  "Roots": [".."],
+  "Logo": "Home-Launcher.png",
+  "Icon": "Home-Launcher.png",
+  "Theme": {
+    "Accent": "#1E3A5F",
+    "AccentText": "#FFFFFF",
+    "Highlight": "#F29F05",
+    "Background": "#F3F5F8"
+  },
+  "PrivateLock": true,
+  "PrivateRoots": ["..\\Private"],
+  "PrivateCategory": "Private",
+  "IdleLockMinutes": 10,
+  "Vault": {
+    "Image": "..\\_vault\\Private.vhdx",
+    "MountPath": "..\\Private"
+  },
+  "DefaultCategory": "Tools",
+  "Categories": ["Films and TV", "Music", "Windows", "Private"],
+  "Exclude": ["Home-Launcher", "Private", "Media-Share-Mapper"],
+  "Tools": {
+    "Clip-Creator":           { "Category": "Films and TV" },
+    "Picture-House":          { "Category": "Films and TV" },
+    "TV-Toolkit":             { "Category": "Films and TV" },
+    "Music-Video-Cataloguer": { "Category": "Music", "Url": "http://localhost:3001" },
+    "MP3-Library":            { "Category": "Music", "Url": "http://localhost:3000" },
+    "MP3-Playlist-Editor":    { "Category": "Music", "Url": "http://localhost:3002" },
+    "Winget-Update-Manager":  { "Category": "Windows" }
+  }
+}

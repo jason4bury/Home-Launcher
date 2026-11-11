@@ -1,0 +1,20 @@
+# Builds live in ..\Builds\, outside the repo. Safety net in case one lands here.
+*.exe
+*.bundle.ps1
+
+# A copy of the engine dropped next to the script for testing (the master
+# copy is the Launcher-Engine repo in E:\Created\_shared\)
+src/Launcher-Engine.ps1
+
+# Local config, logs and temp files
+config.local.json
+*.log
+*.tmp
+
+# Windows clutter
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
