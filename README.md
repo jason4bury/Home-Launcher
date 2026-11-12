@@ -6,7 +6,7 @@
 
 One window that lists every Home tool, shows its version and opens it, its folder, its help guide or its GitHub repo.
 
-![Version](https://img.shields.io/badge/version-v1.00-blue) ![Platform](https://img.shields.io/badge/platform-Windows-0078D6) ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207-5391FE) ![Licence](https://img.shields.io/badge/licence-MIT-green) ![Last commit](https://img.shields.io/github/last-commit/jason4bury/Home-Launcher)
+![Version](https://img.shields.io/badge/version-v1.01-blue) ![Platform](https://img.shields.io/badge/platform-Windows-0078D6) ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207-5391FE) ![Licence](https://img.shields.io/badge/licence-MIT-green) ![Last commit](https://img.shields.io/github/last-commit/jason4bury/Home-Launcher)
 
 ## ✨ Features
 
@@ -31,7 +31,7 @@ A PowerShell/WPF window built on the shared Launcher Engine. It looks in the Hom
 - Windows 10 or 11 with Windows PowerShell 5.1 (or PowerShell 7).
 - The Home tools in the house-style layout: `Home\<Tool>\Builds\` and `Home\<Tool>\Source\`, with private tools in `Home\Private\<Tool>\`.
 - For the vault: Windows Pro or higher (BitLocker), and an administrator account to accept the UAC prompt.
-- To run from source or build the exe: the Launcher Engine (v1.01 or later) at `E:\Created\_shared\Launcher-Engine\Source\`. It is a private repo.
+- To run from source or build the exe: the Launcher Engine (v1.02 or later) at `E:\Created\_shared\Launcher-Engine\Source\`. It is a private repo.
 
 ## 📦 Installation
 
@@ -41,7 +41,7 @@ A PowerShell/WPF window built on the shared Launcher Engine. It looks in the Hom
 
 ### Build the exe
 
-Double-click `Build-Exe.cmd`. It finds the engine in `E:\Created\_shared\`, checks the version in the script matches the newest CHANGELOG entry and the engine is v1.01 or later, runs PSScriptAnalyzer (if installed) on the wrapper and the engine, then pastes the engine, `profile.home.json` and the icon into one script and compiles it with [ps2exe](https://github.com/MScholtes/PS2EXE) (`-STA -noConsole`). The result is saved to the project's `Builds\` folder, outside the repo, as `Home Launcher v<version>.exe`, and needs no other files. It installs ps2exe for your user the first time and logs to `Build-Exe.log`. Set the `LAUNCHER_ENGINE` environment variable to build against another copy of the engine.
+Double-click `Build-Exe.cmd`. It finds the engine in `E:\Created\_shared\`, checks the version in the script matches the newest CHANGELOG entry and the engine is v1.02 or later, runs PSScriptAnalyzer (if installed) on the wrapper and the engine, then pastes the engine, `profile.home.json` and the icon into one script and compiles it with [ps2exe](https://github.com/MScholtes/PS2EXE) (`-STA -noConsole`). The result is saved to the project's `Builds\` folder, outside the repo, as `Home Launcher v<version>.exe`, and needs no other files. It installs ps2exe for your user the first time and logs to `Build-Exe.log`. Set the `LAUNCHER_ENGINE` environment variable to build against another copy of the engine.
 
 The exe is not signed by this script. Once `E:\Created\_shared\Build-Tool.ps1` is in place it replaces `Build-Exe.cmd` and signs the exe:
 
@@ -51,7 +51,7 @@ E:\Created\_shared\Build-Tool.ps1 -Project "E:\Created\Home\Home-Launcher"
 
 ## 🚀 Usage
 
-Start the exe (or `Start Home Launcher.cmd`). Double-click a tile or press **Open** to start a tool. The status bar says what was started, and the About box shows the version, the folder being scanned and the shortcuts.
+Start the exe (or `Start Home Launcher.cmd`). Double-click a tile or press **Open** to start a tool. The status bar says what was started, and the About box shows the version, the folder being scanned and the shortcuts. **Exit** closes the launcher, locking any private tools first.
 
 | Key | Does |
 | --- | --- |

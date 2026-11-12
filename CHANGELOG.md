@@ -6,6 +6,15 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.01] - 2026-11-12
+
+### Added
+- **Exit** button in the header, next to **About**, to close the launcher. Private tools
+  and the vault are still locked on the way out.
+
+### Changed
+- Built on Launcher Engine v1.02; `Build-Exe.cmd` now needs v1.02 or later.
+
 ## [1.00] - 2026-11-11
 First release.
 

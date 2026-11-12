@@ -22,7 +22,7 @@ exit /b %BUILD_RESULT%
 #      E:\Created\_shared\Launcher-Engine\Source\src\Launcher-Engine.ps1
 #      (relative to this folder; set LAUNCHER_ENGINE to use another copy),
 #   2. checks $script:AppVersion matches the newest CHANGELOG entry and
-#      the engine is v1.01 or later (the private-tool lock needs it),
+#      the engine is v1.02 or later (the Exit button needs it),
 #   3. runs PSScriptAnalyzer on the wrapper and the engine if it's installed
 #      (stops on errors, shows warnings),
 #   4. writes one bundled script to %TEMP%: the wrapper with the engine,
@@ -89,8 +89,8 @@ try {
     $enginePath = (Resolve-Path -LiteralPath @($engineCandidates)[0]).ProviderPath
     $engineText = [IO.File]::ReadAllText($enginePath)
     $engineVer  = if ($engineText -match "EngineVersion\s*=\s*'([^']+)'") { $Matches[1] } else { '0.00' }
-    if ([version]$engineVer -lt [version]'1.01') {
-        throw "The engine at $enginePath is v$engineVer. The Home Launcher needs v1.01 or later (the private-tool lock)."
+    if ([version]$engineVer -lt [version]'1.02') {
+        throw "The engine at $enginePath is v$engineVer. The Home Launcher needs v1.02 or later (the Exit button)."
     }
 
     # --- 2. Version ---

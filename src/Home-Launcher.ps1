@@ -34,8 +34,8 @@
 #  entry and the exe name ("Home Launcher v1.00.exe").
 # ------------------------------------------------------------------------
 $script:AppName      = 'Home Launcher'
-$script:AppVersion   = '1.00'
-$script:AppDate      = '2026-11-11'
+$script:AppVersion   = '1.01'
+$script:AppDate      = '2026-11-12'
 $script:AppCopyright = 'Copyright (c) 2026 Jason Rhodes'
 
 # Running as the compiled exe (ps2exe) rather than as a .ps1?
