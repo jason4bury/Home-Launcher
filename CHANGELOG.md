@@ -6,6 +6,16 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.03] - 2026-11-16
+
+### Changed
+- **Better-looking OK and Cancel buttons** in the Unlock, Set a password and Change
+  password boxes: rounded, a little bigger, OK in the launcher's blue and Cancel as a quiet
+  white button, with hover, pressed and focus states like the rest of the launcher. Enter
+  is OK and Esc is Cancel, as before.
+- Built on Launcher Engine v1.04, which has the new dialog buttons. The launcher says so
+  if it finds an older engine.
+
 ## [1.02] - 2026-11-16
 
 ### Changed

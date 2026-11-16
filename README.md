@@ -6,7 +6,7 @@
 
 One window that lists every Home tool, shows its version and opens it, its folder, its help guide or its GitHub repo.
 
-![Version](https://img.shields.io/badge/version-v1.02-blue) ![Platform](https://img.shields.io/badge/platform-Windows-0078D6) ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207-5391FE) ![Licence](https://img.shields.io/badge/licence-MIT-green) ![Last commit](https://img.shields.io/github/last-commit/jason4bury/Home-Launcher)
+![Version](https://img.shields.io/badge/version-v1.03-blue) ![Platform](https://img.shields.io/badge/platform-Windows-0078D6) ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207-5391FE) ![Licence](https://img.shields.io/badge/licence-MIT-green) ![Last commit](https://img.shields.io/github/last-commit/jason4bury/Home-Launcher)
 
 ## ✨ Features
 
@@ -31,13 +31,13 @@ A PowerShell/WPF window built on the shared Launcher Engine. It looks in the Hom
 - Windows 10 or 11 with Windows PowerShell 5.1 (or PowerShell 7).
 - The Home tools in the house-style layout: `Home\<Tool>\Builds\` and `Home\<Tool>\Source\`, with private tools in `Home\Private\<Tool>\`.
 - For the vault: Windows Pro or higher (BitLocker), and an administrator account to accept the UAC prompt.
-- To run from the repo or build a release: the Launcher Engine (v1.03 or later) at `E:\Created\_shared\Launcher-Engine\Source\`. It is a private repo; each release carries a copy of it.
+- To run from the repo or build a release: the Launcher Engine (v1.04 or later) at `E:\Created\_shared\Launcher-Engine\Source\`. It is a private repo; each release carries a copy of it.
 
 ## 📦 Installation
 
-1. Download `Home-Launcher-v1.02.zip` from the [latest release](../../releases/latest).
+1. Download `Home-Launcher-v1.03.zip` from the [latest release](../../releases/latest).
 2. Right-click the zip, choose **Properties**, tick **Unblock** and click OK, *before* extracting it. Files from the internet carry Windows' Mark of the Web, which makes Windows warn about or block scripts.
-3. Extract it into `Home\Home-Launcher\Builds\`. You get a `Home Launcher v1.02` folder, and from there the launcher finds the tools in `Home\` with no setup. Anywhere else, use **Tools folder...** once to point it at the Home folder.
+3. Extract it into `Home\Home-Launcher\Builds\`. You get a `Home Launcher v1.03` folder, and from there the launcher finds the tools in `Home\` with no setup. Anywhere else, use **Tools folder...** once to point it at the Home folder.
 4. Double-click **Home Launcher.cmd** in that folder. It makes a **Home Launcher** shortcut in the folder and in the Start menu, then starts the launcher.
 
 From then on, start it from the shortcut or the Start menu, and pin it to the taskbar if you like: it starts without a console window and shows its own icon. For a new version, extract it and run its Home Launcher.cmd once; the Start menu shortcut then points at the new folder. Settings are kept in `%APPDATA%\Home Launcher`, so they carry over.

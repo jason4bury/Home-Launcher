@@ -39,14 +39,14 @@
 
 # ------------------------------------------------------------------------
 #  App identity - set once here. The version matches the newest CHANGELOG
-#  entry and the release folder ("Home Launcher v1.02").
+#  entry and the release folder ("Home Launcher v1.03").
 # ------------------------------------------------------------------------
 $script:AppName      = 'Home Launcher'
-$script:AppVersion   = '1.02'
+$script:AppVersion   = '1.03'
 $script:AppDate      = '2026-11-16'
 $script:AppCopyright = 'Copyright (c) 2026 Jason Rhodes'
 $script:AppId        = 'jason4bury.Home-Launcher'   # taskbar ID; New-HomeLauncherShortcut.ps1 uses the same one
-$script:MinEngine    = '1.03'                       # finds the other tools' script releases (Builds\<App Name>.lnk)
+$script:MinEngine    = '1.04'                       # rounded OK/Cancel buttons in the password boxes
 
 # WPF needs a single-threaded apartment. The shortcut and powershell.exe
 # -STA already are; relaunch anything else (e.g. some pwsh hosts), hidden.
