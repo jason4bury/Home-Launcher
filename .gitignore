@@ -1,15 +1,22 @@
-# Builds live in ..\Builds\, outside the repo. Safety net in case one lands here.
+# Builds live in ..\Builds\, outside the repo. Safety net in case one lands here:
+# release folders, zips, and the shortcuts New-HomeLauncherShortcut.ps1 makes (full paths, this PC only).
+Builds/
+Home Launcher v*/
+*.zip
+*.lnk
 *.exe
-*.bundle.ps1
+*.exe.old
 
 # A copy of the engine dropped next to the script for testing (the master
-# copy is the Launcher-Engine repo in E:\Created\_shared\)
+# copy is the Launcher-Engine repo in E:\Created\_shared\; Build.cmd copies it
+# into each release)
 src/Launcher-Engine.ps1
 
-# Local config, logs and temp files
+# Local config, logs (Build.log) and temp files
 config.local.json
 *.log
 *.tmp
+*.bak
 
 # Windows clutter
 Thumbs.db

@@ -13,12 +13,20 @@
     password also unlocks that BitLocker vault (UAC prompt), and locking
     or closing the launcher locks it again.
 
-    Running from source, the engine is loaded from
-    E:\Created\_shared\Launcher-Engine\Source\src\Launcher-Engine.ps1
-    (found relative to this script), or from a Launcher-Engine.ps1 placed
-    next to this script. Build-Exe.cmd pastes the engine, the profile and
-    the images into one script before compiling, so the exe needs nothing
-    else.
+    No exe: the launcher ships as this script. Build.cmd copies it, the
+    engine (Launcher-Engine.ps1), profile.home.json and assets\ into
+    Builds\Home Launcher v<version>\, and the "Home Launcher" shortcut
+    starts it without a console window. Running from the repo, the engine
+    is loaded from E:\Created\_shared\Launcher-Engine\Source\src\ (found
+    relative to this script), or from a Launcher-Engine.ps1 placed next
+    to this script.
+
+    Project layout (house style):
+        <project>\Source\               the git repo (this script is in Source\src\)
+        <project>\Source\assets\        icon (.ico) and logo (.png)
+        <project>\Builds\               "Home Launcher v<version>\" release folders, their
+                                        zips and "Home Launcher.lnk", made by Build.cmd
+    Settings: %APPDATA%\Home Launcher\settings.json
 
 .NOTES
     Author:    Jason Rhodes
@@ -31,30 +39,41 @@
 
 # ------------------------------------------------------------------------
 #  App identity - set once here. The version matches the newest CHANGELOG
-#  entry and the exe name ("Home Launcher v1.00.exe").
+#  entry and the release folder ("Home Launcher v1.02").
 # ------------------------------------------------------------------------
 $script:AppName      = 'Home Launcher'
-$script:AppVersion   = '1.01'
-$script:AppDate      = '2026-11-12'
+$script:AppVersion   = '1.02'
+$script:AppDate      = '2026-11-16'
 $script:AppCopyright = 'Copyright (c) 2026 Jason Rhodes'
+$script:AppId        = 'jason4bury.Home-Launcher'   # taskbar ID; New-HomeLauncherShortcut.ps1 uses the same one
+$script:MinEngine    = '1.03'                       # finds the other tools' script releases (Builds\<App Name>.lnk)
 
-# Running as the compiled exe (ps2exe) rather than as a .ps1?
-$script:IsExe = ([System.Diagnostics.Process]::GetCurrentProcess().ProcessName -notmatch '^(powershell|pwsh|powershell_ise)$')
-
-# WPF needs a single-threaded apartment. powershell.exe and the exe (built
-# with -STA) already are; relaunch anything else (e.g. some pwsh hosts).
-if (-not $script:IsExe -and [System.Threading.Thread]::CurrentThread.GetApartmentState() -ne 'STA') {
-    $winPs = Join-Path $env:WINDIR 'System32\WindowsPowerShell\v1.0\powershell.exe'
-    Start-Process -FilePath $winPs -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-STA', '-File', "`"$PSCommandPath`"")
+# WPF needs a single-threaded apartment. The shortcut and powershell.exe
+# -STA already are; relaunch anything else (e.g. some pwsh hosts), hidden.
+if ([System.Threading.Thread]::CurrentThread.GetApartmentState() -ne 'STA') {
+    $winPs = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+    Start-Process -FilePath $winPs -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-STA', '-WindowStyle', 'Hidden', '-File', "`"$PSCommandPath`"")
     exit
 }
 
-#region BUNDLE-PROFILE (Build-Exe.cmd replaces this region with the profile and images)
-$script:EmbeddedProfileJson = $null
-$script:EmbeddedAssets      = @{}
-#endregion BUNDLE-PROFILE
+# One taskbar button with the launcher's own icon (not PowerShell's), and
+# pinning it pins the launcher.
+try {
+    Add-Type -Namespace 'HomeTool' -Name 'Shell' -MemberDefinition '[DllImport("shell32.dll", CharSet = CharSet.Unicode)] public static extern int SetCurrentProcessExplicitAppUserModelID(string appId);'
+    [void][HomeTool.Shell]::SetCurrentProcessExplicitAppUserModelID($script:AppId)
+} catch { Write-Verbose "No taskbar ID: $($_.Exception.Message)" }
 
-#region BUNDLE-ENGINE (Build-Exe.cmd replaces this region with Launcher-Engine.ps1 itself)
+function Show-StartupError {
+    <# A message box for problems before the window opens (no console to show them in). #>
+    param([string]$Message)
+    Add-Type -AssemblyName PresentationFramework
+    [System.Windows.MessageBox]::Show($Message, $script:AppName, 'OK', 'Error') | Out-Null
+}
+
+# ------------------------------------------------------------------------
+#  Launcher Engine: LAUNCHER_ENGINE if set, else Launcher-Engine.ps1 next
+#  to this script (a release folder), else the shared repo copy.
+# ------------------------------------------------------------------------
 $script:EngineCandidates = @(
     $env:LAUNCHER_ENGINE,
     (Join-Path $PSScriptRoot 'Launcher-Engine.ps1'),
@@ -63,66 +82,47 @@ $script:EngineCandidates = @(
 ) | Where-Object { $_ -and (Test-Path -LiteralPath $_ -PathType Leaf) }
 
 if (-not $script:EngineCandidates) {
-    Add-Type -AssemblyName PresentationFramework
-    [System.Windows.MessageBox]::Show(
-        "Can't find Launcher-Engine.ps1.`n`nIt should be at E:\Created\_shared\Launcher-Engine\Source\src\, or next to this script.",
-        $script:AppName, 'OK', 'Error') | Out-Null
+    Show-StartupError "Can't find Launcher-Engine.ps1.`n`nIt should be next to this script (in a release folder), or at E:\Created\_shared\Launcher-Engine\Source\src\."
     exit 1
 }
 . (@($script:EngineCandidates)[0])
-#endregion BUNDLE-ENGINE
 
-# ------------------------------------------------------------------------
-#  Where am I? The launcher's project folder (Home\Home-Launcher\):
-#    exe in  <project>\Builds\            -> <project>
-#    exe anywhere else                    -> the exe's folder
-#    script in <project>\Source\src\      -> <project>
-#  The profile's Roots (".." = the Home folder), PrivateRoots and Vault
-#  paths are relative to it.
-# ------------------------------------------------------------------------
-if ($script:IsExe) {
-    $exeDir = Split-Path -Parent ([System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName)
-    $script:LauncherHome = if ((Split-Path -Leaf $exeDir) -eq 'Builds') { Split-Path -Parent $exeDir } else { $exeDir }
-    $script:AssetPath = $null
-} else {
-    $script:LauncherHome = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
-    $script:AssetPath = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\assets'))
-}
-
-# ------------------------------------------------------------------------
-#  Profile: embedded in the exe, else profile.home.json next to this
-#  script.
-# ------------------------------------------------------------------------
-try {
-    if ($script:EmbeddedProfileJson) {
-        $script:LauncherProfile = $script:EmbeddedProfileJson | ConvertFrom-Json
-    } else {
-        $profilePath = Join-Path $PSScriptRoot 'profile.home.json'
-        $script:LauncherProfile = Get-Content -LiteralPath $profilePath -Raw -Encoding UTF8 | ConvertFrom-Json
-    }
-} catch {
-    Add-Type -AssemblyName PresentationFramework
-    [System.Windows.MessageBox]::Show("Couldn't read profile.home.json:`n$($_.Exception.Message)",
-        $script:AppName, 'OK', 'Error') | Out-Null
+if ([version]$script:EngineVersion -lt [version]$script:MinEngine) {
+    Show-StartupError "$script:AppName needs Launcher Engine v$script:MinEngine or later; this one is v$script:EngineVersion.`n`nUpdate E:\Created\_shared\Launcher-Engine\Source\ and run Build.cmd again."
     exit 1
 }
 
-# The private lock needs engine v1.01 or later (an older copy of the engine
-# would simply never show the private tools).
-if ([version]$script:EngineVersion -lt [version]'1.01') {
-    Add-Type -AssemblyName PresentationFramework
-    [System.Windows.MessageBox]::Show("$script:AppName needs Launcher Engine v1.01 or later; this one is v$script:EngineVersion.`n`nUpdate E:\Created\_shared\Launcher-Engine\Source\.",
-        $script:AppName, 'OK', 'Error') | Out-Null
+# ------------------------------------------------------------------------
+#  Where am I? The launcher's project folder (Home\Home-Launcher\):
+#    script in <project>\Builds\Home Launcher v<x.yy>\   -> <project>
+#    script in <project>\Source\src\                     -> <project>
+#    a release folder unpacked anywhere else             -> that folder
+#  The profile's Roots (".." = the Home folder), PrivateRoots and Vault
+#  paths are relative to it. Anywhere else, use Tools folder... once.
+# ------------------------------------------------------------------------
+$parentDir = Split-Path -Parent $PSScriptRoot
+$script:LauncherHome = if (@('Builds', 'Source') -contains (Split-Path -Leaf $parentDir)) { Split-Path -Parent $parentDir } else { $PSScriptRoot }
+
+# Images: assets\ beside the script (release), else Source\assets\ (repo).
+$script:AssetPath = @((Join-Path $PSScriptRoot 'assets'), (Join-Path $parentDir 'assets')) |
+    Where-Object { Test-Path -LiteralPath $_ -PathType Container } | Select-Object -First 1
+
+# ------------------------------------------------------------------------
+#  Profile: profile.home.json next to this script.
+# ------------------------------------------------------------------------
+try {
+    $profilePath = Join-Path $PSScriptRoot 'profile.home.json'
+    $script:LauncherProfile = Get-Content -LiteralPath $profilePath -Raw -Encoding UTF8 | ConvertFrom-Json
+} catch {
+    Show-StartupError "Couldn't read profile.home.json:`n$($_.Exception.Message)"
     exit 1
 }
 
 try {
     Start-Launcher -LauncherProfile $script:LauncherProfile -LauncherHome $script:LauncherHome `
         -AppName $script:AppName -AppVersion $script:AppVersion -AppDate $script:AppDate `
-        -AppCopyright $script:AppCopyright -Assets $script:EmbeddedAssets -AssetPath $script:AssetPath
+        -AppCopyright $script:AppCopyright -AssetPath $script:AssetPath
 } catch {
-    Add-Type -AssemblyName PresentationFramework
-    [System.Windows.MessageBox]::Show("$script:AppName stopped with an error:`n`n$($_.Exception.Message)",
-        $script:AppName, 'OK', 'Error') | Out-Null
+    Show-StartupError "$script:AppName stopped with an error:`n`n$($_.Exception.Message)"
     exit 1
 }

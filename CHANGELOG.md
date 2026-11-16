@@ -2,9 +2,34 @@
 
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), with versions numbered
-`<major>.<minor>` and a two-digit minor (v1.00, v1.01 ... v1.10) to match the exe file names.
+`<major>.<minor>` and a two-digit minor (v1.00, v1.01 ... v1.10) to match the release names.
 
 ## [Unreleased]
+
+## [1.02] - 2026-11-16
+
+### Changed
+- **No exe any more.** Antivirus (ESET among others) kept flagging the PS2EXE exes as
+  trojans by mistake, so the Home Launcher now ships as its script, like Homelab. The
+  release is a `Home Launcher v1.02` folder (and `Home-Launcher-v1.02.zip`) holding
+  `Home-Launcher.ps1`, the Launcher Engine, `profile.home.json` and the icons.
+  **Home Launcher.cmd** makes a **Home Launcher** shortcut there and in the Start menu,
+  which starts it without a console window and with its own taskbar icon
+  (`jason4bury.Home-Launcher`).
+- Built on Launcher Engine v1.03, so tiles start the other Home tools' script releases
+  through their `Builds\<App Name>.lnk` as each tool moves off its exe. The launcher says
+  so if it finds an older engine.
+- `Build.cmd` replaces `Build-Exe.cmd`: it copies the release files, zips them, makes
+  `Builds\Home Launcher.lnk` and scans the result with ESET's command-line scanner.
+- The project folder is worked out from the script's place (`Builds\<release>\` or
+  `Source\src\`), and images load from `assets\` beside the script.
+
+### Fixed
+- Started from a host that isn't single-threaded (some PowerShell 7 windows), the
+  launcher restarted itself with a console window showing. It now restarts hidden.
+
+### Removed
+- `Build-Exe.cmd` and the code that only the exe used (bundled engine, profile and images).
 
 ## [1.01] - 2026-11-12
 

@@ -4,10 +4,20 @@
   "Icon": "assets\\Home-Launcher.ico",
   "Side": "Home",
   "Description": "PowerShell/WPF tool for listing and starting every Home tool",
-  "Bundle": {
-    "Engine": "..\\..\\..\\_shared\\Launcher-Engine\\Source\\src\\Launcher-Engine.ps1",
-    "Profile": "src\\profile.home.json",
-    "EmbedAssets": ["assets\\Home-Launcher.png"]
-  },
-  "IncludeFiles": []
+  "RequireAdmin": false,
+  "Release": {
+    "Files": {
+      "Home-Launcher.ps1": "src\\Home-Launcher.ps1",
+      "profile.home.json": "src\\profile.home.json",
+      "Launcher-Engine.ps1": "..\\..\\..\\_shared\\Launcher-Engine\\Source\\src\\Launcher-Engine.ps1",
+      "New-HomeLauncherShortcut.ps1": "src\\New-HomeLauncherShortcut.ps1",
+      "Home Launcher.cmd": "release\\Home Launcher.cmd",
+      "assets\\Home-Launcher.ico": "assets\\Home-Launcher.ico",
+      "assets\\Home-Launcher.png": "assets\\Home-Launcher.png",
+      "README.md": "README.md",
+      "CHANGELOG.md": "CHANGELOG.md",
+      "LICENSE": "LICENSE"
+    },
+    "Shortcut": "New-HomeLauncherShortcut.ps1"
+  }
 }
