@@ -6,6 +6,13 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.06] - 2026-11-19
+
+### Changed
+- **Slim scrollbar.** The tool list scrolls with a thin rounded handle and no arrow buttons, instead
+  of Windows' grey scrollbar. It widens a little on hover and follows the light and dark looks.
+  Built with Launcher Engine 1.07.
+
 ## [1.05] - 2026-11-19
 
 ### Added
