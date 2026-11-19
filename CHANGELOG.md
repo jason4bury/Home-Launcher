@@ -6,6 +6,19 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.05] - 2026-11-19
+
+### Added
+- **Dark look.** A **Look** button in the header cycles **Light** (as before, and the default),
+  **Dark** and **Auto** (the same as Windows); the new look is used the next time the launcher
+  starts. The blue header and orange category bars stay; tiles, bars, buttons and the message and
+  password boxes go dark, with a dark title bar.
+- **Help.** A **Help** button (or F1) explains starting and finding tools, the buttons on each
+  tile, the tools folder, the look and the keys.
+- About notes what's new in 1.05.
+- Built on Launcher Engine v1.06, which has the dark look and Help. The launcher says so if it
+  finds an older engine.
+
 ## [1.04] - 2026-11-19
 
 ### Changed
