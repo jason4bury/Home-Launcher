@@ -6,6 +6,20 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.04] - 2026-11-19
+
+### Changed
+- **Messages and questions in the launcher's own look.** Warnings, the "still running from
+  the vault" question and the About box open in a Home Launcher window (the blue header band
+  with a coloured badge, the light page and the rounded launcher buttons) instead of
+  Windows' plain grey message box. Their text can be selected and copied.
+- Locking while a private tool is still running asks **Lock the vault** or **Leave it
+  unlocked** instead of Yes and No.
+- About notes what's new in 1.04.
+- Built on Launcher Engine v1.05, which has the new message box. The launcher says so if it
+  finds an older engine.
+- Unchanged: the box shown if the launcher can't start or can't find its engine.
+
 ## [1.03] - 2026-11-16
 
 ### Changed
