@@ -6,6 +6,12 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.07] - 2026-11-19
+
+### Changed
+- **Search box.** A rounded field with a magnifier icon, a blue ring while you type and a small **x**
+  to clear it, in the light and dark looks. Built with Launcher Engine 1.08.
+
 ## [1.06] - 2026-11-19
 
 ### Changed

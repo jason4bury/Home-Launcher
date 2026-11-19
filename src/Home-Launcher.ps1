@@ -42,12 +42,12 @@
 #  entry and the release folder ("Home Launcher v1.03").
 # ------------------------------------------------------------------------
 $script:AppName      = 'Home Launcher'
-$script:AppVersion   = '1.06'
+$script:AppVersion   = '1.07'
 $script:AppDate      = '2026-11-19'
 $script:AppCopyright = 'Copyright (c) 2026 Jason Rhodes'
 $script:AppId        = 'jason4bury.Home-Launcher'   # taskbar ID; New-HomeLauncherShortcut.ps1 uses the same one
-$script:MinEngine    = '1.07'                       # slim scrollbar
-$script:AppNote      = "New in 1.06: a slim rounded scrollbar in the tool list, in the light and dark looks."
+$script:MinEngine    = '1.08'                       # rounded search box
+$script:AppNote      = "New in 1.07: a rounded search box with an icon and a clear button, and a slim scrollbar."
 
 # WPF needs a single-threaded apartment. The shortcut and powershell.exe
 # -STA already are; relaunch anything else (e.g. some pwsh hosts), hidden.
