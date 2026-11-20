@@ -6,6 +6,14 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.08] - 2026-11-20
+
+### Fixed
+- **Blank icon.** The icon file held only compressed (PNG) pictures, which Windows' taskbar and
+  shortcut showed as blank at small sizes. It now has standard pictures at every small size
+  (16 to 64 pixels) and a PNG only at 256, so the house icon shows on the taskbar, the shortcut
+  and the Start menu.
+
 ## [1.07] - 2026-11-19
 
 ### Changed
