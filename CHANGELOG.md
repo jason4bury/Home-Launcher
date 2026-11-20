@@ -6,6 +6,12 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.09] - 2026-11-20
+
+### Fixed
+- The **Unlock** (and Set or Change password) box now follows the look: in the dark look its body
+  and password field are dark, not white. Built with Launcher Engine 1.09.
+
 ## [1.08] - 2026-11-20
 
 ### Fixed
