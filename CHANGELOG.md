@@ -6,6 +6,24 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.10] - 2026-11-21
+
+### Changed
+- **New sections.** The tools are grouped as **Media**, **Docker**, **Utilities**
+  and **Private** (still hidden until unlocked). Private tools that belong to the other sections show
+  there once unlocked. Each tool's section is the `Category` in its own `launcher.json`.
+- **Media Share Mapper** is shown again (under Utilities), and the **Standards Checker** from
+  `E:\Created\_shared` is listed under Utilities.
+
+### Added
+- **Tabs.** Each section has a tab along the top with its tool count; click one to show its tools.
+  The launcher remembers the tab.
+- **View** switches between the tiles and a compact list, and is remembered.
+- While you search, matches from every section show, and each tab gives its number of matches.
+- **Wider, shorter window**: 1400 by 740, centred on the screen, so a full section of tiles fits
+  without scrolling (set by `WindowWidth` and `WindowHeight` in the profile).
+- Built with Launcher Engine 1.10.
+
 ## [1.09] - 2026-11-20
 
 ### Fixed

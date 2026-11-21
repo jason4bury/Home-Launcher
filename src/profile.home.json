@@ -2,7 +2,7 @@
   "Name": "Home Launcher",
   "Title": "Home Launcher",
   "Subtitle": "My Home tools",
-  "Roots": [".."],
+  "Roots": ["..", "..\\..\\_shared"],
   "Logo": "Home-Launcher.png",
   "Icon": "Home-Launcher.png",
   "Theme": {
@@ -19,16 +19,15 @@
     "Image": "..\\_vault\\Private.vhdx",
     "MountPath": "..\\Private"
   },
+  "SectionTabs": true,
+  "WindowWidth": 1400,
+  "WindowHeight": 740,
   "DefaultCategory": "Tools",
-  "Categories": ["Films and TV", "Music", "Windows", "Private"],
-  "Exclude": ["Home-Launcher", "Private", "Media-Share-Mapper"],
+  "Categories": ["Media", "Docker", "Utilities", "Private"],
+  "Exclude": ["Home-Launcher", "Private", "Launcher-Engine"],
   "Tools": {
-    "Clip-Creator":           { "Category": "Films and TV" },
-    "Picture-House":          { "Category": "Films and TV" },
-    "TV-Toolkit":             { "Category": "Films and TV" },
-    "Music-Video-Cataloguer": { "Category": "Music", "Url": "http://localhost:3001" },
-    "MP3-Library":            { "Category": "Music", "Url": "http://localhost:3000" },
-    "MP3-Playlist-Editor":    { "Category": "Music", "Url": "http://localhost:3002" },
-    "Winget-Update-Manager":  { "Category": "Windows" }
+    "Music-Video-Cataloguer": { "Url": "http://localhost:3001" },
+    "MP3-Library":            { "Url": "http://localhost:3000" },
+    "MP3-Playlist-Editor":    { "Url": "http://localhost:3002" }
   }
 }
