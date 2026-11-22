@@ -6,6 +6,17 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.11] - 2026-11-22
+
+### Added
+- **Unlock/Lock button** in the header: **Unlock** asks for the password and shows the private tools,
+  then it reads **Lock** and hides them again. Ctrl+Shift+U still does the same. Needs Launcher
+  Engine v1.11.
+
+### Changed
+- Build.cmd also points a copy of the shortcut in the folder above Home at the newest version,
+  as it does for the Start menu and desktop ones.
+
 ## [1.10] - 2026-11-21
 
 ### Changed

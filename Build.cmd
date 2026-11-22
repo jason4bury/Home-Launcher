@@ -143,7 +143,7 @@ try {
         # New-HomeLauncherShortcut unblocks the folder; nothing else changes in it.
     }
 
-    # --- 6b. Start menu and desktop shortcuts ---
+    # --- 6b. Start menu and desktop shortcuts, and one kept in the folder above Home ---
     # Shortcuts made by double-clicking the release's .cmd point at that version's folder. Once an
     # old version is recycled they'd open nothing and show a blank icon (the taskbar takes its icon
     # from the Start menu shortcut), so any that exist are pointed at this version too.
@@ -151,7 +151,9 @@ try {
     if (Test-Path -LiteralPath $built) {
         $wsh = New-Object -ComObject WScript.Shell
         $src = $wsh.CreateShortcut($built)
-        foreach ($dir in @((Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs'), [Environment]::GetFolderPath('Desktop'))) {
+        $aboveHome = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $here))   # Source, Home-Launcher, Home, then the folder above
+        foreach ($dir in @((Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs'), [Environment]::GetFolderPath('Desktop'), $aboveHome)) {
+            if (-not $dir) { continue }
             $other = Join-Path $dir "$appName.lnk"
             if (-not (Test-Path -LiteralPath $other)) { continue }
             $l = $wsh.CreateShortcut($other)

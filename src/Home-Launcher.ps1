@@ -8,7 +8,7 @@
     Start-Launcher. The engine finds the tools in the Home folder (the
     folder that holds Home-Launcher\) and shows them as tiles.
 
-    Private tools in Home\Private\ stay hidden until Ctrl+Shift+U and the
+    Private tools in Home\Private\ stay hidden until Unlock (or Ctrl+Shift+U) and the
     launcher password. If Home\_vault\Private.vhdx exists, the same
     password also unlocks that BitLocker vault (UAC prompt), and locking
     or closing the launcher locks it again.
@@ -42,12 +42,12 @@
 #  entry and the release folder ("Home Launcher v1.03").
 # ------------------------------------------------------------------------
 $script:AppName      = 'Home Launcher'
-$script:AppVersion   = '1.10'
+$script:AppVersion   = '1.11'
 $script:AppDate      = '2026-11-19'
 $script:AppCopyright = 'Copyright (c) 2026 Jason Rhodes'
 $script:AppId        = 'jason4bury.Home-Launcher'   # taskbar ID; New-HomeLauncherShortcut.ps1 uses the same one
-$script:MinEngine    = '1.10'                       # section tabs, window size and the list view
-$script:AppNote      = "New in 1.10: the sections are tabs, the window is wider and shorter, and View shows a compact list."
+$script:MinEngine    = '1.11'                       # the Unlock/Lock button
+$script:AppNote      = "New in 1.11: an Unlock/Lock button in the header for the private tools (Ctrl+Shift+U still works)."
 
 # WPF needs a single-threaded apartment. The shortcut and powershell.exe
 # -STA already are; relaunch anything else (e.g. some pwsh hosts), hidden.

@@ -6,7 +6,7 @@
 
 One window that lists every Home tool, shows its version and opens it, its folder, its help guide or its GitHub repo.
 
-![Version](https://img.shields.io/badge/version-v1.10-blue) ![Platform](https://img.shields.io/badge/platform-Windows-0078D6) ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207-5391FE) ![Licence](https://img.shields.io/badge/licence-MIT-green) ![Last commit](https://img.shields.io/github/last-commit/jason4bury/Home-Launcher)
+![Version](https://img.shields.io/badge/version-v1.11-blue) ![Platform](https://img.shields.io/badge/platform-Windows-0078D6) ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207-5391FE) ![Licence](https://img.shields.io/badge/licence-MIT-green) ![Last commit](https://img.shields.io/github/last-commit/jason4bury/Home-Launcher)
 
 ## ✨ Features
 
@@ -19,7 +19,7 @@ A PowerShell/WPF window built on the shared Launcher Engine. It looks in the Hom
 - **Docker web apps** (MP3 Library, MP3 Playlist Editor, Music Video Cataloguer) open their page in the browser.
 - **Quick links** on every tile: **Folder** (opens the project folder), **Help** (the help guide in `docs\`, or the README) and **GitHub** (the repo, taken from the tool's git settings).
 - **Search** by name, description or section. While you search, matches from every section show, and each tab gives its number of matches. Enter starts the only match, Esc clears.
-- **Private tools stay hidden.** Nothing in `Home\Private\` is shown, and nothing hints that it exists, until you press Ctrl+Shift+U and type the launcher password. They hide again when you press **Lock** (or Ctrl+Shift+U), after 10 minutes without using the launcher, or when it closes.
+- **Private tools stay hidden.** Nothing in `Home\Private\` is shown until you press **Unlock** (or Ctrl+Shift+U) and type the launcher password. They hide again when you press **Lock** (the same button) or Ctrl+Shift+U, after 10 minutes without using the launcher, or when it closes.
 - **Opens the vault.** Once `Home\_vault\Private.vhdx` exists, the same password also attaches and unlocks that BitLocker container, and locking or closing the launcher locks it again.
 - No internet lookups, nothing installed, settings in `%APPDATA%`. No exe: the release is the script itself, with the engine and profile beside it.
 
@@ -36,9 +36,9 @@ A PowerShell/WPF window built on the shared Launcher Engine. It looks in the Hom
 
 ## 📦 Installation
 
-1. Download `Home-Launcher-v1.10.zip` from the [latest release](../../releases/latest).
+1. Download `Home-Launcher-v1.11.zip` from the [latest release](../../releases/latest).
 2. Right-click the zip, choose **Properties**, tick **Unblock** and click OK, *before* extracting it. Files from the internet carry Windows' Mark of the Web, which makes Windows warn about or block scripts.
-3. Extract it into `Home\Home-Launcher\Builds\`. You get a `Home Launcher v1.10` folder, and from there the launcher finds the tools in `Home\` with no setup. Anywhere else, use **Tools folder...** once to point it at the Home folder.
+3. Extract it into `Home\Home-Launcher\Builds\`. You get a `Home Launcher v1.11` folder, and from there the launcher finds the tools in `Home\` with no setup. Anywhere else, use **Tools folder...** once to point it at the Home folder.
 4. Double-click **Home Launcher.cmd** in that folder. It makes a **Home Launcher** shortcut in the folder and in the Start menu, then starts the launcher.
 
 From then on, start it from the shortcut or the Start menu, and pin it to the taskbar if you like: it starts without a console window and shows its own icon. For a new version, extract it and run its Home Launcher.cmd once; the Start menu shortcut then points at the new folder. Settings are kept in `%APPDATA%\Home Launcher`, so they carry over.
@@ -69,7 +69,7 @@ Start the launcher from its shortcut or the Start menu (or **Home Launcher.cmd**
 
 ### Private tools
 
-The first time you press Ctrl+Shift+U the launcher asks you to choose a password. After that it asks for it, and the **Private** group appears with **Lock** and **Password...** buttons in the header. Only a salted PBKDF2-SHA256 hash of the password is saved. The password is a privacy curtain: anyone can still start a tool directly, so the real protection is the encrypted vault.
+The first time you press **Unlock** (or Ctrl+Shift+U) the launcher asks you to choose a password. After that it asks for it, the **Private** tab appears, **Unlock** becomes **Lock**, and a **Password...** button shows in the header. Only a salted PBKDF2-SHA256 hash of the password is saved. The password is a privacy curtain: anyone can still start a tool directly, so the real protection is the encrypted vault.
 
 When `Home\_vault\Private.vhdx` exists and is locked, unlocking also shows a UAC prompt and opens the vault with the same password, so set the launcher password to match the vault's BitLocker password. Locking, 10 minutes idle or closing the launcher locks the vault again (another UAC prompt). If a private tool is still running from the vault, the launcher asks first, and an idle lock only hides the tiles.
 
@@ -91,7 +91,7 @@ To set up the vault, follow "Vault setup" in the Launcher & GitHub Standards Pro
 | `DefaultCategory` | Section for tools that don't have one |
 | `Exclude` | Folders to skip: the launcher itself, `Private` (scanned separately once unlocked) and the Launcher Engine (a library, not a tool) |
 | `Tools` | Per-tool defaults by folder name, e.g. `"MP3-Library": { "Url": "http://localhost:3000" }` |
-| `PrivateLock` | `true` turns on the Ctrl+Shift+U lock |
+| `PrivateLock` | `true` turns on the Unlock/Lock button and Ctrl+Shift+U |
 | `PrivateRoots` | Folders whose tools are all private (`..\Private`) |
 | `PrivateCategory` | The section for private tools that don't name one |
 | `IdleLockMinutes` | Minutes without use before private tools hide again (`0` = only on close) |
