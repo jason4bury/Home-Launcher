@@ -6,6 +6,11 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.13] - 2026-11-24
+
+### Added
+- Music Stats in the Media tab, opening `http://localhost:3050`.
+
 ## [1.12] - 2026-11-24
 
 ### Added
