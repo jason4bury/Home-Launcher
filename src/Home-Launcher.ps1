@@ -42,12 +42,12 @@
 #  entry and the release folder ("Home Launcher v1.03").
 # ------------------------------------------------------------------------
 $script:AppName      = 'Home Launcher'
-$script:AppVersion   = '1.13'
+$script:AppVersion   = '1.14'
 $script:AppDate      = '2026-11-24'
 $script:AppCopyright = 'Copyright (c) 2026 Jason Rhodes'
 $script:AppId        = 'jason4bury.Home-Launcher'   # taskbar ID; New-HomeLauncherShortcut.ps1 uses the same one
 $script:MinEngine    = '1.11'                       # the Unlock/Lock button
-$script:AppNote      = "New in 1.13: Music Stats in the Media tab, opening http://localhost:3050."
+$script:AppNote      = "New in 1.14: Disk Space Over Time in the Docker tab, opening http://localhost:3060."
 
 # WPF needs a single-threaded apartment. The shortcut and powershell.exe
 # -STA already are; relaunch anything else (e.g. some pwsh hosts), hidden.

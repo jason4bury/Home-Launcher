@@ -6,6 +6,13 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.14] - 2026-11-24
+
+### Added
+- Disk Space Over Time in the Docker tab, opening `http://localhost:3060`.
+- Launcher Engine v1.12: a web tool's address can be set on this PC only with `"Urls"` in
+  `%APPDATA%\Home Launcher\settings.json`, such as for a web app that runs on a NAS.
+
 ## [1.13] - 2026-11-24
 
 ### Added
