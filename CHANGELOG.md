@@ -6,6 +6,11 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.12] - 2026-11-24
+
+### Added
+- Container Dashboard Status in the Docker tab, opening `http://localhost:3040`.
+
 ## [1.11] - 2026-11-22
 
 ### Added

@@ -26,8 +26,9 @@
   "Categories": ["Media", "Docker", "Utilities", "Private"],
   "Exclude": ["Home-Launcher", "Private", "Launcher-Engine"],
   "Tools": {
-    "Music-Video-Cataloguer": { "Url": "http://localhost:3001" },
-    "MP3-Library":            { "Url": "http://localhost:3000" },
-    "MP3-Playlist-Editor":    { "Url": "http://localhost:3002" }
+    "Container-Dashboard-Status": { "Url": "http://localhost:3040" },
+    "Music-Video-Cataloguer":     { "Url": "http://localhost:3001" },
+    "MP3-Library":                { "Url": "http://localhost:3000" },
+    "MP3-Playlist-Editor":        { "Url": "http://localhost:3002" }
   }
 }
